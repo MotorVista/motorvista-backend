@@ -1,0 +1,23 @@
+{
+  "name": "motorvista-backend",
+  "version": "1.0.0",
+  "description": "MotorVista back-end",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MotorVista/motorvista-backend.git"
+  },
+  "keywords": [
+    "MotorVista",
+    "backend"
+  ],
+  "author": "mykola2312",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MotorVista/motorvista-backend/issues"
+  },
+  "homepage": "https://github.com/MotorVista/motorvista-backend#readme"
+}
