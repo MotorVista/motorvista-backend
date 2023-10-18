@@ -17,7 +17,7 @@ CREATE TABLE omnicars.vendor (
     title VARCHAR NOT NULL UNIQUE
 );
 
-CREATE TYPE omnicars.transmission_type AS ENUM('MANUAL', 'AUTOMATIC', 'CVT');
+CREATE TYPE omnicars.gearbox_type AS ENUM('MANUAL', 'AUTOMATIC', 'CVT');
 CREATE TYPE omnicars.fuel_type AS ENUM('GASOLINE', 'DIESEL', 'HYBRID', 'ELECTRIC');
 CREATE TYPE omnicars.engine_config AS ENUM('INLINE', 'V', 'BOXER');
 
@@ -46,7 +46,9 @@ CREATE TABLE omnicars.car (
     vendor INT NOT NULL,
     year SMALLINT NOT NULL,
     engine INT NOT NULL,
-    transmission omnicars.transmission_type NOT NULL,
+
+    gearbox_type omnicars.gearbox_type NOT NULL,
+    gearbox_number INT,
 
     CONSTRAINT car_vendor
         FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id),
@@ -61,7 +63,7 @@ CREATE TABLE omnicars.car (
 DROP TABLE omnicars.user;
 DROP TABLE omnicars.car;
 DROP TYPE omnicars.role;
-DROP TYPE omnicars.transmission_type;
+DROP TYPE omnicars.gearbox_type;
 DROP TYPE omnicars.fuel_type;
 DROP TABLE omnicars.engine;
 DROP TABLE omnicars.vendor;
