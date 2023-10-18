@@ -19,6 +19,7 @@ CREATE TABLE omnicars.vendor (
 
 CREATE TYPE omnicars.transmission_type AS ENUM('MANUAL', 'AUTOMATIC', 'CVT');
 CREATE TYPE omnicars.fuel_type AS ENUM('GASOLINE', 'DIESEL', 'HYBRID', 'ELECTRIC');
+CREATE TYPE omnicars.engine_config AS ENUM('INLINE', 'V', 'BOXER');
 
 CREATE TABLE omnicars.engine (
     id SERIAL PRIMARY KEY UNIQUE,
@@ -28,6 +29,7 @@ CREATE TABLE omnicars.engine (
     fuel omnicars.fuel_type NOT NULL, -- тип палива
     max_rev INT NOT NULL, -- макс. оберти
     torque SMALLINT NOT NULL, -- крутний момент
+    config omnicars.engine_config NOT NULL, -- конфігурація
     cylinders SMALLINT NOT NULL, -- кількість циліндрів
     bore FLOAT NOT NULL, -- діаметр (поршня)
     stroke FLOAT NOT NULL, -- хід (поршня)
@@ -40,6 +42,7 @@ CREATE TABLE omnicars.engine (
 CREATE TABLE omnicars.car (
     id SERIAL PRIMARY KEY UNIQUE,
     model VARCHAR NOT NULL UNIQUE,
+    variation VARCHAR,
     vendor INT NOT NULL,
     year SMALLINT NOT NULL,
     engine INT NOT NULL,
