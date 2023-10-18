@@ -21,14 +21,14 @@ CREATE TYPE omnicars.transmission_type AS ENUM('MANUAL', 'AUTOMATIC', 'CVT');
 CREATE TYPE omnicars.fuel_type AS ENUM('GASOLINE', 'DIESEL', 'HYBRID', 'ELECTRIC');
 
 CREATE TABLE omnicars.engine (
-    id SERIAL PRIMAERY KEY UNIQUE,
+    id SERIAL PRIMARY KEY UNIQUE,
     model VARCHAR NOT NULL UNIQUE,
     vendor INT NOT NULL,
-    power INT NOT NULL UNSIGNED,
+    power INT NOT NULL,
     fuel omnicars.fuel_type NOT NULL,
-    max_rev INT NOT NULL UNSIGNED,
-    torque SMALLINT NOT NULL UNSIGNED,
-    cylinders SMALLINT NOT NULL UNSIGNED,
+    max_rev INT NOT NULL,
+    torque SMALLINT NOT NULL,
+    cylinders SMALLINT NOT NULL,
     bore FLOAT NOT NULL,
     stroke FLOAT NOT NULL,
     compression_rate FLOAT NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE omnicars.car (
     id SERIAL PRIMARY KEY UNIQUE,
     model VARCHAR NOT NULL UNIQUE,
     vendor INT NOT NULL,
-    year SMALLINT NOT NULL UNSIGNED,
+    year SMALLINT NOT NULL,
     engine INT NOT NULL,
     transmission omnicars.transmission_type NOT NULL,
 
