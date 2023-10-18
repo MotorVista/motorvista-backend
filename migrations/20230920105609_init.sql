@@ -25,16 +25,17 @@ CREATE TABLE omnicars.engine (
     id SERIAL PRIMARY KEY UNIQUE,
     model VARCHAR NOT NULL UNIQUE,
     vendor INT NOT NULL,
-    power INT NOT NULL, -- потужність
-    power_per_litre INT,
+
+    power FLOAT NOT NULL, -- потужність
+    power_per_litre FLOAT,
     fuel omnicars.fuel_type NOT NULL, -- тип палива
     max_rev INT NOT NULL, -- макс. оберти
-    torque SMALLINT NOT NULL, -- крутний момент
-    config omnicars.engine_config NOT NULL, -- конфігурація
-    cylinders SMALLINT NOT NULL, -- кількість циліндрів
-    bore FLOAT NOT NULL, -- діаметр (поршня)
-    stroke FLOAT NOT NULL, -- хід (поршня)
-    compression_ratio FLOAT NOT NULL, -- ступінь стиснення
+    torque FLOAT, -- крутний момент
+    config omnicars.engine_config, -- конфігурація
+    cylinders SMALLINT, -- кількість циліндрів
+    bore FLOAT, -- діаметр (поршня)
+    stroke FLOAT, -- хід (поршня)
+    compression_ratio FLOAT, -- ступінь стиснення
 
     CONSTRAINT engine_vendor
         FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id)
@@ -48,13 +49,13 @@ CREATE TABLE omnicars.car (
     year SMALLINT NOT NULL,
 
     engine INT NOT NULL,
-    fuel_capacity INT NOT NULL,
 
+    max_weight FLOAT NOT NULL,
+    max_load FLOAT NOT NULL,
+    max_speed FLOAT NOT NULL,
+    fuel_capacity FLOAT NOT NULL,
     gearbox_type omnicars.gearbox_type NOT NULL,
     gearbox_number INT,
-
-    max_weight INT,
-    max_load INT,
 
     CONSTRAINT car_vendor
         FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id),
@@ -69,6 +70,7 @@ CREATE TABLE omnicars.car (
 DROP TABLE omnicars.user;
 DROP TABLE omnicars.car;
 DROP TYPE omnicars.role;
+DROP TYPE omnicars.engine_config;
 DROP TYPE omnicars.gearbox_type;
 DROP TYPE omnicars.fuel_type;
 DROP TABLE omnicars.engine;
