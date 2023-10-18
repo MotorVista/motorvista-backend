@@ -43,7 +43,7 @@ CREATE TABLE omnicars.engine (
 
 CREATE TABLE omnicars.car (
     id SERIAL PRIMARY KEY UNIQUE,
-    model VARCHAR NOT NULL UNIQUE,
+    model VARCHAR NOT NULL,
     variation VARCHAR,
     vendor INT NOT NULL,
     year SMALLINT NOT NULL,
