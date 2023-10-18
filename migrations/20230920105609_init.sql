@@ -17,8 +17,8 @@ CREATE TABLE omnicars.vendor (
     title VARCHAR NOT NULL UNIQUE
 );
 
-CREATE TYPE omnicars.gearbox_type AS ENUM('MANUAL', 'AUTOMATIC', 'CVT');
-CREATE TYPE omnicars.fuel_type AS ENUM('GASOLINE', 'DIESEL', 'HYBRID', 'ELECTRIC');
+CREATE TYPE omnicars.gearbox_type AS ENUM('MANUAL', 'AUTOMATIC');
+CREATE TYPE omnicars.fuel_type AS ENUM('GASOLINE', 'DIESEL', 'ELECTRIC');
 CREATE TYPE omnicars.engine_config AS ENUM('INLINE', 'V', 'BOXER');
 
 CREATE TABLE omnicars.engine (
@@ -55,6 +55,7 @@ CREATE TABLE omnicars.car (
 
     max_weight INT,
     max_load INT,
+
     CONSTRAINT car_vendor
         FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id),
     
