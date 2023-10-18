@@ -24,14 +24,14 @@ CREATE TABLE omnicars.engine (
     id SERIAL PRIMARY KEY UNIQUE,
     model VARCHAR NOT NULL UNIQUE,
     vendor INT NOT NULL,
-    power INT NOT NULL,
-    fuel omnicars.fuel_type NOT NULL,
-    max_rev INT NOT NULL,
-    torque SMALLINT NOT NULL,
-    cylinders SMALLINT NOT NULL,
-    bore FLOAT NOT NULL,
-    stroke FLOAT NOT NULL,
-    compression_rate FLOAT NOT NULL,
+    power INT NOT NULL, -- потужність
+    fuel omnicars.fuel_type NOT NULL, -- тип палива
+    max_rev INT NOT NULL, -- макс. оберти
+    torque SMALLINT NOT NULL, -- крутний момент
+    cylinders SMALLINT NOT NULL, -- кількість циліндрів
+    bore FLOAT NOT NULL, -- діаметр (поршня)
+    stroke FLOAT NOT NULL, -- хід (поршня)
+    compression_ratio FLOAT NOT NULL, -- ступінь стиснення
 
     CONSTRAINT engine_vendor
         FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id)
