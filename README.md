@@ -1,2 +1,2 @@
-# MotorVista
-A back-end for MotorVista application
+# OmniCars
+A back-end for OmniCars application

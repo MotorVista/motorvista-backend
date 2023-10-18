@@ -1,7 +1,7 @@
 {
-  "name": "motorvista-backend",
+  "name": "omnicars-backend",
   "version": "1.0.0",
-  "description": "MotorVista back-end",
+  "description": "OmniCars back-end",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -12,18 +12,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MotorVista/motorvista-backend.git"
+    "url": "git+https://github.com/OmniCars/omnicars-backend.git"
   },
   "keywords": [
-    "MotorVista",
+    "OmniCars",
     "backend"
   ],
   "author": "mykola2312",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MotorVista/motorvista-backend/issues"
+    "url": "https://github.com/OmniCars/omnicars-backend/issues"
   },
-  "homepage": "https://github.com/MotorVista/motorvista-backend#readme",
+  "homepage": "https://github.com/OmniCars/omnicars-backend#readme",
   "devDependencies": {
     "@types/node": "^20.6.0",
     "@typescript-eslint/eslint-plugin": "^6.7.0",

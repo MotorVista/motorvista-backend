@@ -1,31 +1,31 @@
 -- +goose Up
 -- +goose StatementBegin
-CREATE SCHEMA motorvista;
+CREATE SCHEMA omnicars;
 
-CREATE TYPE motorvista.role AS ENUM('USER', 'ADMIN');
+CREATE TYPE omnicars.role AS ENUM('USER', 'ADMIN');
 
-CREATE TABLE motorvista.user (
+CREATE TABLE omnicars.user (
     id SERIAL PRIMARY KEY UNIQUE,
     email VARCHAR NOT NULL UNIQUE,
     fisrt_name VARCHAR NOT NULL,
     last_name VARCHAR,
-    role motorvista.role NOT NULL DEFAULT('USER')
+    role omnicars.role NOT NULL DEFAULT('USER')
 );
 
-CREATE TABLE motorvista.vendor (
+CREATE TABLE omnicars.vendor (
     id SERIAL PRIMARY KEY UNIQUE,
     title VARCHAR NOT NULL UNIQUE
 );
 
-CREATE TYPE motorvista.transmission_type AS ENUM('MANUAL', 'AUTOMATIC', 'CVT');
-CREATE TYPE motorvista.fuel_type AS ENUM('GASOLINE', 'DIESEL', 'HYBRID', 'ELECTRIC');
+CREATE TYPE omnicars.transmission_type AS ENUM('MANUAL', 'AUTOMATIC', 'CVT');
+CREATE TYPE omnicars.fuel_type AS ENUM('GASOLINE', 'DIESEL', 'HYBRID', 'ELECTRIC');
 
-CREATE TABLE motorvista.engine (
+CREATE TABLE omnicars.engine (
     id SERIAL PRIMAERY KEY UNIQUE,
     model VARCHAR NOT NULL UNIQUE,
     vendor INT NOT NULL,
     power INT NOT NULL UNSIGNED,
-    fuel motorvista.fuel_type NOT NULL,
+    fuel omnicars.fuel_type NOT NULL,
     max_rev INT NOT NULL UNSIGNED,
     torque SMALLINT NOT NULL UNSIGNED,
     cylinders SMALLINT NOT NULL UNSIGNED,
@@ -34,34 +34,34 @@ CREATE TABLE motorvista.engine (
     compression_rate FLOAT NOT NULL,
 
     CONSTRAINT engine_vendor
-        FOREIGN KEY(vendor) REFERENCES motorvista.vendor(id)
+        FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id)
 );
 
-CREATE TABLE motorvista.car (
+CREATE TABLE omnicars.car (
     id SERIAL PRIMARY KEY UNIQUE,
     model VARCHAR NOT NULL UNIQUE,
     vendor INT NOT NULL,
     year SMALLINT NOT NULL UNSIGNED,
     engine INT NOT NULL,
-    transmission motorvista.transmission_type NOT NULL,
+    transmission omnicars.transmission_type NOT NULL,
 
     CONSTRAINT car_vendor
-        FOREIGN KEY(vendor) REFERENCES motorvista.vendor(id),
+        FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id),
     
     CONSTRAINT car_engine
-        FOREIGN KEY(engine) REFERENCES motorvista.engine(id)
+        FOREIGN KEY(engine) REFERENCES omnicars.engine(id)
 );
 -- +goose StatementEnd
 
 -- +goose Down
 -- +goose StatementBegin
-DROP TABLE motorvista.user;
-DROP TABLE motorvista.car;
-DROP TYPE motorvista.role;
-DROP TYPE motorvista.transmission_type;
-DROP TYPE motorvista.fuel_type;
-DROP TABLE motorvista.engine;
-DROP TABLE motorvista.vendor;
+DROP TABLE omnicars.user;
+DROP TABLE omnicars.car;
+DROP TYPE omnicars.role;
+DROP TYPE omnicars.transmission_type;
+DROP TYPE omnicars.fuel_type;
+DROP TABLE omnicars.engine;
+DROP TABLE omnicars.vendor;
 
-DROP SCHEMA motorvista;
+DROP SCHEMA omnicars;
 -- +goose StatementEnd
