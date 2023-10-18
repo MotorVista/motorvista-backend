@@ -26,6 +26,7 @@ CREATE TABLE omnicars.engine (
     model VARCHAR NOT NULL UNIQUE,
     vendor INT NOT NULL,
     power INT NOT NULL, -- потужність
+    power_per_litre INT,
     fuel omnicars.fuel_type NOT NULL, -- тип палива
     max_rev INT NOT NULL, -- макс. оберти
     torque SMALLINT NOT NULL, -- крутний момент
@@ -45,11 +46,15 @@ CREATE TABLE omnicars.car (
     variation VARCHAR,
     vendor INT NOT NULL,
     year SMALLINT NOT NULL,
+
     engine INT NOT NULL,
+    fuel_capacity INT NOT NULL,
 
     gearbox_type omnicars.gearbox_type NOT NULL,
     gearbox_number INT,
 
+    max_weight INT,
+    max_load INT,
     CONSTRAINT car_vendor
         FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id),
     
