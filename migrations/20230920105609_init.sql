@@ -49,6 +49,7 @@ CREATE TABLE omnicars.engine (
 CREATE TYPE omnicars.drive_wheel AS ENUM('FRONT', 'REAR', 'ALL');
 CREATE TYPE omnicars.assist_brake AS ENUM('ABS');
 CREATE TYPE omnicars.brake_type AS ENUM('VENTILATED', 'DISC');
+CREATE TYPE omnicars.steer_config AS ENUM('LEFT', 'RIGHT');
 
 CREATE TABLE omnicars.car (
     id SERIAL PRIMARY KEY UNIQUE,
@@ -80,6 +81,14 @@ CREATE TABLE omnicars.car (
     front_brakes omnicars.brake_type NOT NULL,
     rear_brakes omnicars.brake_type NOT NULL,
     assist_brake omnicars.assist_brake,
+
+    cabin_material VARCHAR,
+    cabin_steer omnicars.steer_config NOT NULL,
+    cabin_seats SMALLINT NOT NULL,
+    cabin_sex_buff FLOAT,
+
+    trunk_space_min FLOAT,
+    trunk_space_max FLOAT NOT NULL,
 
     CONSTRAINT car_vendor
         FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id),
