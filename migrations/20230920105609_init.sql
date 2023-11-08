@@ -46,6 +46,10 @@ CREATE TABLE omnicars.engine (
         FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id)
 );
 
+CREATE TYPE omnicars.drive_wheel AS ENUM('FRONT', 'REAR', 'ALL');
+CREATE TYPE omnicars.assist_brake AS ENUM('ABS');
+CREATE TYPE omnicars.brake_type AS ENUM('VENTILATED', 'DISC');
+
 CREATE TABLE omnicars.car (
     id SERIAL PRIMARY KEY UNIQUE,
     model VARCHAR NOT NULL,
@@ -55,6 +59,7 @@ CREATE TABLE omnicars.car (
 
     engine INT NOT NULL,
 
+    acceleration FLOAT NOT NULL, -- seconds for 100km/h
     max_weight FLOAT NOT NULL,
     max_load FLOAT NOT NULL,
     max_speed FLOAT NOT NULL,
@@ -63,12 +68,18 @@ CREATE TABLE omnicars.car (
     gearbox_type omnicars.gearbox_type NOT NULL,
     gearbox_number INT,
 
+    drive_wheel omnicars.drive_wheel NOT NULL,
+
     tire_width FLOAT,
     tire_profile FLOAT,
     tire_rim FLOAT,
 
     wheel_width FLOAT,
     wheel_height FLOAT,
+
+    front_brakes omnicars.brake_type NOT NULL,
+    rear_brakes omnicars.brake_type NOT NULL,
+    assist_brake omnicars.assist_brake,
 
     CONSTRAINT car_vendor
         FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id),
