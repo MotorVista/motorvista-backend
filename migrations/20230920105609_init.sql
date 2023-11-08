@@ -32,50 +32,51 @@ CREATE TABLE omnicars.car (
     vendor INT NOT NULL,
     year SMALLINT NOT NULL,
 
-    engine_model VARCHAR,
-    power FLOAT NOT NULL,
-    min_power_rpm FLOAT,
-    max_power_rpm FLOAT NOT NULL,
-    power_per_litre FLOAT,
+    -- загальна інформація
+    acceleration FLOAT NOT NULL, -- seconds for 100km/h
+    max_weight FLOAT NOT NULL, -- макс вага
+    max_load FLOAT NOT NULL, -- макс навантаження
+    max_speed FLOAT NOT NULL, -- макс швидкість
+    fuel_consumption FLOAT NOT NULL, -- розхід палива
+    fuel_capacity FLOAT NOT NULL, -- об'єм баку
+    gearbox_type omnicars.gearbox_type NOT NULL, -- тип коробкі передач
+    gearbox_number INT, -- число коробкі передач (gears)
+
+    engine_model VARCHAR, -- модель двигуна
+    power FLOAT NOT NULL, -- потужність
+    min_power_rpm FLOAT, -- мін. оберти для вказаної потужності
+    max_power_rpm FLOAT NOT NULL, -- макс. оберти для вказаної потужності
+    power_per_litre FLOAT, -- потужність на літр палива
     fuel omnicars.fuel_type NOT NULL, -- тип палива
     torque FLOAT, -- крутний момент
-    min_torque_rpm FLOAT,
-    max_torque_rpm FLOAT,
+    min_torque_rpm FLOAT, -- мін. крутний момент
+    max_torque_rpm FLOAT, -- макс. крутний момент
     config omnicars.engine_config, -- конфігурація
     cylinders SMALLINT, -- кількість циліндрів
     bore FLOAT, -- діаметр (поршня)
     stroke FLOAT, -- хід (поршня)
     compression_ratio FLOAT, -- ступінь стиснення
 
-    acceleration FLOAT NOT NULL, -- seconds for 100km/h
-    max_weight FLOAT NOT NULL,
-    max_load FLOAT NOT NULL,
-    max_speed FLOAT NOT NULL,
-    fuel_consumption FLOAT NOT NULL,
-    fuel_capacity FLOAT NOT NULL,
-    gearbox_type omnicars.gearbox_type NOT NULL,
-    gearbox_number INT,
+    drive_wheel omnicars.drive_wheel NOT NULL, -- передній чи задний привод
 
-    drive_wheel omnicars.drive_wheel NOT NULL,
+    tire_width FLOAT, -- ширина колес
+    tire_profile FLOAT, -- довжина покришки до диску
+    tire_rim FLOAT, -- діаметр диску (в дюймах)
 
-    tire_width FLOAT,
-    tire_profile FLOAT,
-    tire_rim FLOAT,
+    wheel_width FLOAT, -- ширина колеса
+    wheel_height FLOAT, -- довжина (висота) колеса
 
-    wheel_width FLOAT,
-    wheel_height FLOAT,
+    front_brakes omnicars.brake_type NOT NULL, -- передні тормоза (тип)
+    rear_brakes omnicars.brake_type NOT NULL, -- задні тормоза (тип)
+    assist_brake omnicars.assist_brake, -- вспоміжна тормозна система (ручник)
 
-    front_brakes omnicars.brake_type NOT NULL,
-    rear_brakes omnicars.brake_type NOT NULL,
-    assist_brake omnicars.assist_brake,
-
-    cabin_material VARCHAR,
-    cabin_steer omnicars.steer_config NOT NULL,
-    cabin_seats SMALLINT NOT NULL,
+    cabin_material VARCHAR, -- матеріал салону
+    cabin_steer omnicars.steer_config NOT NULL, -- де руль
+    cabin_seats SMALLINT NOT NULL, -- кількість місць в салоні
     cabin_sex_buff FLOAT,
 
-    trunk_space_min FLOAT,
-    trunk_space_max FLOAT NOT NULL,
+    trunk_space_min FLOAT, -- мін. розмір багажнику
+    trunk_space_max FLOAT NOT NULL, -- макс. розмір багажнику
 
     CONSTRAINT car_vendor
         FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id)
