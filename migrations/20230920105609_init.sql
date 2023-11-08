@@ -20,14 +20,19 @@ CREATE TABLE omnicars.vendor (
 CREATE TYPE omnicars.gearbox_type AS ENUM('MANUAL', 'AUTOMATIC');
 CREATE TYPE omnicars.fuel_type AS ENUM('GASOLINE', 'DIESEL', 'ELECTRIC');
 CREATE TYPE omnicars.engine_config AS ENUM('INLINE', 'V', 'BOXER');
+CREATE TYPE omnicars.drive_wheel AS ENUM('FRONT', 'REAR', 'ALL');
+CREATE TYPE omnicars.assist_brake AS ENUM('ABS');
+CREATE TYPE omnicars.brake_type AS ENUM('VENTILATED', 'DISC');
+CREATE TYPE omnicars.steer_config AS ENUM('LEFT', 'RIGHT');
 
-CREATE TABLE omnicars.engine (
+CREATE TABLE omnicars.car (
     id SERIAL PRIMARY KEY UNIQUE,
-    model VARCHAR NOT NULL UNIQUE,
+    model VARCHAR NOT NULL,
+    variation VARCHAR,
     vendor INT NOT NULL,
+    year SMALLINT NOT NULL,
 
-    -- min_power FLOAT NOT NULL, -- потужність
-    --max_power FLOAT NOT NULL, -- потужність
+    engine_model VARCHAR,
     power FLOAT NOT NULL,
     min_power_rpm FLOAT,
     max_power_rpm FLOAT NOT NULL,
@@ -41,24 +46,6 @@ CREATE TABLE omnicars.engine (
     bore FLOAT, -- діаметр (поршня)
     stroke FLOAT, -- хід (поршня)
     compression_ratio FLOAT, -- ступінь стиснення
-
-    CONSTRAINT engine_vendor
-        FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id)
-);
-
-CREATE TYPE omnicars.drive_wheel AS ENUM('FRONT', 'REAR', 'ALL');
-CREATE TYPE omnicars.assist_brake AS ENUM('ABS');
-CREATE TYPE omnicars.brake_type AS ENUM('VENTILATED', 'DISC');
-CREATE TYPE omnicars.steer_config AS ENUM('LEFT', 'RIGHT');
-
-CREATE TABLE omnicars.car (
-    id SERIAL PRIMARY KEY UNIQUE,
-    model VARCHAR NOT NULL,
-    variation VARCHAR,
-    vendor INT NOT NULL,
-    year SMALLINT NOT NULL,
-
-    engine INT NOT NULL,
 
     acceleration FLOAT NOT NULL, -- seconds for 100km/h
     max_weight FLOAT NOT NULL,
@@ -91,10 +78,7 @@ CREATE TABLE omnicars.car (
     trunk_space_max FLOAT NOT NULL,
 
     CONSTRAINT car_vendor
-        FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id),
-    
-    CONSTRAINT car_engine
-        FOREIGN KEY(engine) REFERENCES omnicars.engine(id)
+        FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id)
 );
 -- +goose StatementEnd
 
@@ -106,7 +90,6 @@ DROP TYPE omnicars.role;
 DROP TYPE omnicars.engine_config;
 DROP TYPE omnicars.gearbox_type;
 DROP TYPE omnicars.fuel_type;
-DROP TABLE omnicars.engine;
 DROP TABLE omnicars.vendor;
 
 DROP SCHEMA omnicars;
