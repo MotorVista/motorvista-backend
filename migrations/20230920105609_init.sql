@@ -63,6 +63,13 @@ CREATE TABLE omnicars.car (
     gearbox_type omnicars.gearbox_type NOT NULL,
     gearbox_number INT,
 
+    tire_a FLOAT,
+    tire_b FLOAT,
+    tire_r SMALLINT,
+
+    wheel_a SMALLINT,
+    wheel_b SMALLINT,
+
     CONSTRAINT car_vendor
         FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id),
     
