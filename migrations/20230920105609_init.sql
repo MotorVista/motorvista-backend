@@ -42,6 +42,7 @@ CREATE TABLE omnicars.car (
     gearbox_type omnicars.gearbox_type NOT NULL, -- тип коробкі передач
     gearbox_number INT, -- число коробкі передач (gears)
 
+    -- двигун
     engine_model VARCHAR, -- модель двигуна
     power FLOAT NOT NULL, -- потужність
     min_power_rpm FLOAT, -- мін. оберти для вказаної потужності
@@ -57,19 +58,19 @@ CREATE TABLE omnicars.car (
     stroke FLOAT, -- хід (поршня)
     compression_ratio FLOAT, -- ступінь стиснення
 
+    -- колеса
     drive_wheel omnicars.drive_wheel NOT NULL, -- передній чи задний привод
-
     tire_width FLOAT, -- ширина колес
     tire_profile FLOAT, -- довжина покришки до диску
     tire_rim FLOAT, -- діаметр диску (в дюймах)
-
     wheel_width FLOAT, -- ширина колеса
     wheel_height FLOAT, -- довжина (висота) колеса
-
+    -- тормоза
     front_brakes omnicars.brake_type NOT NULL, -- передні тормоза (тип)
     rear_brakes omnicars.brake_type NOT NULL, -- задні тормоза (тип)
     assist_brake omnicars.assist_brake, -- вспоміжна тормозна система (ручник)
 
+    -- салон
     cabin_material VARCHAR, -- матеріал салону
     cabin_steer omnicars.steer_config NOT NULL, -- де руль
     cabin_seats SMALLINT NOT NULL, -- кількість місць в салоні
