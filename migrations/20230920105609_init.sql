@@ -33,13 +33,13 @@ CREATE TABLE omnicars.car (
     year SMALLINT NOT NULL,
 
     -- загальна інформація
-    acceleration FLOAT NOT NULL, -- seconds for 100km/h
-    max_weight FLOAT NOT NULL, -- макс вага
-    max_load FLOAT NOT NULL, -- макс навантаження
-    max_speed FLOAT NOT NULL, -- макс швидкість
-    fuel_consumption FLOAT NOT NULL, -- розхід палива
-    fuel_capacity FLOAT NOT NULL, -- об'єм баку
-    gearbox_type omnicars.gearbox_type NOT NULL, -- тип коробкі передач
+    acceleration FLOAT, -- seconds for 100km/h
+    max_weight FLOAT, -- макс вага
+    max_load FLOAT, -- макс навантаження
+    max_speed FLOAT, -- макс швидкість
+    fuel_consumption FLOAT, -- розхід палива
+    fuel_capacity FLOAT, -- об'єм баку
+    gearbox_type omnicars.gearbox_type, -- тип коробкі передач
     gearbox_number INT, -- число коробкі передач (gears)
 
     -- двигун
@@ -66,8 +66,8 @@ CREATE TABLE omnicars.car (
     wheel_width FLOAT, -- ширина колеса
     wheel_height FLOAT, -- довжина (висота) колеса
     -- тормоза
-    front_brakes omnicars.brake_type NOT NULL, -- передні тормоза (тип)
-    rear_brakes omnicars.brake_type NOT NULL, -- задні тормоза (тип)
+    front_brakes omnicars.brake_type, -- передні тормоза (тип)
+    rear_brakes omnicars.brake_type, -- задні тормоза (тип)
     assist_brake omnicars.assist_brake, -- вспоміжна тормозна система (ручник)
 
     -- салон
@@ -77,7 +77,7 @@ CREATE TABLE omnicars.car (
     cabin_sex_buff FLOAT,
 
     trunk_space_min FLOAT, -- мін. розмір багажнику
-    trunk_space_max FLOAT NOT NULL, -- макс. розмір багажнику
+    trunk_space_max FLOAT, -- макс. розмір багажнику
 
     CONSTRAINT car_vendor
         FOREIGN KEY(vendor) REFERENCES omnicars.vendor(id)
