@@ -26,11 +26,16 @@ CREATE TABLE omnicars.engine (
     model VARCHAR NOT NULL UNIQUE,
     vendor INT NOT NULL,
 
-    power FLOAT NOT NULL, -- потужність
+    -- min_power FLOAT NOT NULL, -- потужність
+    --max_power FLOAT NOT NULL, -- потужність
+    power FLOAT NOT NULL,
+    min_power_rpm FLOAT,
+    max_power_rpm FLOAT NOT NULL,
     power_per_litre FLOAT,
     fuel omnicars.fuel_type NOT NULL, -- тип палива
-    max_rev INT NOT NULL, -- макс. оберти
     torque FLOAT, -- крутний момент
+    min_torque_rpm FLOAT,
+    max_torque_rpm FLOAT,
     config omnicars.engine_config, -- конфігурація
     cylinders SMALLINT, -- кількість циліндрів
     bore FLOAT, -- діаметр (поршня)
@@ -53,6 +58,7 @@ CREATE TABLE omnicars.car (
     max_weight FLOAT NOT NULL,
     max_load FLOAT NOT NULL,
     max_speed FLOAT NOT NULL,
+    fuel_consumption FLOAT NOT NULL,
     fuel_capacity FLOAT NOT NULL,
     gearbox_type omnicars.gearbox_type NOT NULL,
     gearbox_number INT,
