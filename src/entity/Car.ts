@@ -20,7 +20,7 @@ export enum EngineConfig {
 
 export enum DriveWheel {
     FRONT = "FRONT",
-    NEAR = "NEAR",
+    REAR = "REAR",
     ALL = "ALL"
 }
 
