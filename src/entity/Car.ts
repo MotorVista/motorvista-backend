@@ -79,4 +79,49 @@ export class Car {
 
     @Column({ type: "int", nullable: true })
     gearboxNumber: number
+
+
+    @Column()
+    engineModel: string
+
+    @Column("float")
+    power: number
+
+    @Column({ type: "float", nullable: true })
+    minPowerRpm: number
+
+    @Column("float")
+    maxPowerRpm: number
+
+    @Column("float")
+    powerPerLitre: number
+
+    @Column({ type: "enum", enum: FuelType })
+    fuelType: FuelType
+
+    @Column("float")
+    torque: number
+
+    @Column("float")
+    minTorqueRpm: number
+
+    @Column("float")
+    maxTorqueRpm: number
+
+    @Column({ type: "enum", enum: EngineConfig })
+    config: EngineConfig
+
+    @Column("smallint")
+    cylinders: number
+
+    @Column("float")
+    bore: number
+
+    @Column("float")
+    stroke: number
+
+    @Column("float")
+    compressionRate: number
+
+
 }
