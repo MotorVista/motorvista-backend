@@ -124,4 +124,48 @@ export class Car {
     compressionRate: number
 
 
+    @Column({ type: "enum", enum: DriveWheel })
+    driveWheel: DriveWheel
+
+    @Column({ type: "float", nullable: true })
+    tireWidth: number
+
+    @Column({ type: "float", nullable: true })
+    tireProfile: number
+
+    @Column({ type: "float", nullable: true })
+    tireRim: number
+
+    @Column({ type: "float", nullable: true })
+    wheelWidth: number
+
+    @Column({ type: "float", nullable: true })
+    wheelHeight: number
+
+
+    @Column({ type: "enum", enum: BrakeType })
+    frontBrakes: BrakeType
+
+    @Column({ type: "enum", enum: BrakeType })
+    rearBrakes
+
+    @Column({ type: "enum", enum: AssistBrake })
+    assistBrake: AssistBrake
+
+
+    @Column({ type: "varchar", nullable: true })
+    cabinMaterial: string
+
+    @Column({ type: "enum", enum: SteerConfig })
+    cabinSteer: SteerConfig
+
+    @Column("smallint")
+    cabinSeats: number
+
+
+    @Column({ type: "float", nullable: true })
+    trunkSpaceMin: number
+
+    @Column({ type: "float", nullable: true })
+    trunkSpaceMax: number
 }
