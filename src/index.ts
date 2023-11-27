@@ -4,11 +4,11 @@ import express, { Express, Request, Response } from "express";
 dotenv.config();
 
 const app: Express = express();
-app.get("/", (req: Request, res: Response) => {
+app.get("/", async (req: Request, res: Response) => {
     res.send("Hello World from TS Node Express!");
 });
 
-app.get("/test", (req: Request, res: Response) => {
+app.get("/test", async (req: Request, res: Response) => {
     res.send("A test route!");
 });
 
