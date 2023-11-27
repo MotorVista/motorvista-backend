@@ -1,7 +1,12 @@
 import dotenv from "dotenv";
 import express, { Express, Request, Response } from "express";
+import { AppDataSource } from "./data-source.js";
 
-dotenv.config();
+AppDataSource.initialize().then(() => {
+    app.listen(3000);
+}).catch((e) => {
+    console.log(e);
+})
 
 const app: Express = express();
 app.get("/", async (req: Request, res: Response) => {
@@ -11,5 +16,3 @@ app.get("/", async (req: Request, res: Response) => {
 app.get("/test", async (req: Request, res: Response) => {
     res.send("A test route!");
 });
-
-app.listen(3000);

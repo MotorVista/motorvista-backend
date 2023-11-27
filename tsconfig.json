@@ -3,6 +3,8 @@
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
         "target": "ES2022",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "sourceMap": true,
         "outDir": "dist",
       "allowSyntheticDefaultImports": true
