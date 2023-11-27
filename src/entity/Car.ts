@@ -43,6 +43,40 @@ export class Car {
     @PrimaryGeneratedColumn()
     id: number
 
+    @Column()
+    model: string
+
+    @Column()
+    variation: string
+
     @ManyToOne(() => Vendor, (vendor) => vendor.cars)
     vendor: Relation<Vendor>
+
+    @Column("smallint")
+    year: number
+
+
+    @Column({ type: "float", nullable: true })
+    acceleration: number
+
+    @Column({ type: "float", nullable: true })
+    maxWeight: number
+
+    @Column({ type: "float", nullable: true })
+    maxLoad: number
+
+    @Column({ type: "float", nullable: true })
+    maxSpeed: number
+
+    @Column({ type: "float", nullable: true })
+    fuelConsumption: number
+
+    @Column({ type: "float", nullable: true })
+    fuelCapacity: number
+
+    @Column({ type: "enum", enum: GearboxType })
+    gearboxType: GearboxType
+
+    @Column({ type: "int", nullable: true })
+    gearboxNumber: number
 }
