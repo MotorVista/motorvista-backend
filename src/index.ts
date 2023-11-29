@@ -5,9 +5,16 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import sessions from "express-session";
 import "express-async-errors";
+import UserSession from "./user-session.js";
 import APIErrorHandler from './middleware/api-error-handler.js';
 import { AppDataSource } from "./data-source.js";
 import { AppRoutes } from "./routes.js";
+
+declare module 'express-session' {
+    interface SessionData {
+        user: UserSession
+    }
+}
 
 AppDataSource.initialize().then(() => {
     dotenv.config();

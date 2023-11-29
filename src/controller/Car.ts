@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source.js";
 import { Car } from "../entity/Car.js";
-import {errors} from "../error.js";
+import { errors } from "../error.js";
 
 export async function carGetAll(req: Request, res: Response) {
     const carRepository = AppDataSource.getRepository(Car);
