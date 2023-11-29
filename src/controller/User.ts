@@ -1,8 +1,10 @@
-import { Request, Response } from "express";
-import { AppDataSource } from "../data-source.js";
-import { errors } from "../error.js";
-import { checkAuth } from "../auth.js";
-import { validateEmail } from "../validate.js";
+import {Request, Response} from "express";
+import {AppDataSource} from "../data-source.js";
+import {User, UserRole} from "../entity/User.js";
+import {errors} from "../error.js";
+import {checkAuth} from "../auth.js";
+import {obscureEmail, validateEmail} from "../validate.js";
+import bcrypt from "bcrypt";
 
 export async function userRegister(req: Request, res: Response) {
     if (checkAuth(req)) {
@@ -18,5 +20,20 @@ export async function userRegister(req: Request, res: Response) {
         throw errors.INVALID_PARAMETER;
     }
 
-    res.end();
+    const repo = AppDataSource.getRepository(User);
+
+    const existing = await repo.findOneBy({ email });
+    if (existing) {
+        throw errors.USER_ALREADY_EXISTS;
+    }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+    const user = repo.create({
+        email, password: passwordHash, firstName, lastName, role: UserRole.USER
+    });
+    await repo.save(user);
+
+    user.email = obscureEmail(user.email);
+    delete user.password;
+    res.json(user);
 }
