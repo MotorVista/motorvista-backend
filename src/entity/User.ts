@@ -10,7 +10,7 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({ type: "varchar", length: 255, unique: true })
     email: string
 
     @Column({ type: "varchar", length: 64 })
