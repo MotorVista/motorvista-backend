@@ -3,3 +3,7 @@ const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+")
 export function validateEmail(email: string): boolean {
     return !!String(email).toLowerCase().match(EMAIL_REGEX)
 }
+
+export function obscureEmail(email: string): string {
+    return email.replace(/(^.|@[^@](?=[^@]*$)|\.[^.]+$)|./g, (x, y) => y || '*');
+}
