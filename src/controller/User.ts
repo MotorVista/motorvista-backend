@@ -1,9 +1,8 @@
 import {Request, Response} from "express";
 import {AppDataSource} from "../data-source.js";
 import {User, UserRole} from "../entity/User.js";
-import {UserSession} from "../user-session.js";
 import {errors} from "../error.js";
-import {checkAuth} from "../auth.js";
+import {checkAuth, createSession} from "../auth.js";
 import {obscureEmail, validateEmail} from "../validate.js";
 import bcrypt from "bcrypt";
 
@@ -29,12 +28,19 @@ export async function userRegister(req: Request, res: Response) {
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
-    const user = repo.create({
+    let user = repo.create({
         email, password: passwordHash, firstName, lastName, role: UserRole.USER
     });
     await repo.save(user);
 
+    // figure out newly created user's id
+    user = await repo.findOneBy({ email });
+    if (!user) {
+        throw errors.FAILED;
+    }
 
+    // create http session
+    createSession(req, user.id, user.role);
 
     user.email = obscureEmail(user.email);
     delete user.password;
