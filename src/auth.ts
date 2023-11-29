@@ -1,7 +1,9 @@
-import { Request, Response } from "express";
-import { UserSession } from "./user-session.js";
-import { User, UserRole } from "./entity/User.js";
+import {Request} from "express";
+import {UserSession} from "./user-session.js";
+import {User, UserRole} from "./entity/User.js";
+import {Route} from "./routes.js";
 import {AppDataSource} from "./data-source.js";
+import {errors} from "./error.js";
 
 export function createSession(req: Request, user: User) {
     req.session.user = new UserSession(user.id, user.role);
@@ -30,3 +32,18 @@ export function checkRole(req: Request, role: UserRole) {
         return false;
     }
 }
+
+export function checkRole(first: UserRole, second: UserRole) {
+    return first == UserRole.ADMIN || first == second;
+}
+
+// export function checkRouteAuth(route: Route, req: Request) {
+//     if (route.auth) {
+//         const user = getCurrentUser(req);
+//         if (!user) {
+//             throw errors.UNAUTHORIZED;
+//         }
+//
+//         if (!checkRole(user))
+//     }
+// }

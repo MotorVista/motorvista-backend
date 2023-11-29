@@ -30,8 +30,10 @@ AppDataSource.initialize().then(() => {
     }));
 
     AppRoutes.forEach((route) => {
-        app[route.method](route.path, (request: Request, response: Response, next: NextFunction) => {
-            route.action(request, response)
+        app[route.method](route.path, (req: Request, res: Response, next: NextFunction) => {
+            // check auth
+
+            route.action(req, res)
                 .then(() => next())
                 .catch(err => next(err));
         });

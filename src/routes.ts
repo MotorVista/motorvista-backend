@@ -1,8 +1,19 @@
+import { Request, Response } from "express";
+import { UserRole } from "./entity/User.js";
 import { vendorGetAll, vendorGetById } from "./controller/Vendor.js";
 import { carGetAll, carGetById } from "./controller/Car.js";
 import { userRegister, userLogin, userGetLogin, userDeleteLogin } from "./controller/User.js";
 
-export const AppRoutes = [
+type RouteAction = (req: Request, res: Response) => Promise<void>
+
+export interface Route {
+    path: string
+    method: string
+    action: RouteAction
+    auth?: UserRole
+}
+
+export const AppRoutes: Route[] = [
     {
         path: "/vendor",
         method: "get",
