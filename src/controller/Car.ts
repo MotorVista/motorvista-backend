@@ -1,9 +1,15 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source.js";
 import { Car } from "../entity/Car.js";
-import { errors } from "../error.js";
+import {errors} from "../error.js";
 
-export async function carGetByIdAction(req: Request, res: Response) {
+export async function carGetAll(req: Request, res: Response) {
+    const carRepository = AppDataSource.getRepository(Car);
+    const cars = await carRepository.find();
+    res.json(cars);
+}
+
+export async function carGetById(req: Request, res: Response) {
     const carRepository = AppDataSource.getRepository(Car);
 
     const id = parseInt(req.params.id);

@@ -1,27 +1,25 @@
-import { vendorGetAllAction } from "./controller/VendorGetAllAction.js";
-import { vendorGetByIdAction } from "./controller/VendorGetByIdAction.js";
-import { carGetAllAction } from "./controller/CarGetAllAction.js";
-import { carGetByIdAction } from "./controller/CarGetByIdAction.js";
+import { vendorGetAll, vendorGetById } from "./controller/Vendor.js";
+import { carGetAll, carGetById } from "./controller/Car.js";
 
 export const AppRoutes = [
     {
         path: "/vendor",
         method: "get",
-        action: vendorGetAllAction
+        action: vendorGetAll
     },
     {
         path: "/vendor/:id",
         method: "get",
-        action: vendorGetByIdAction
+        action: vendorGetById
     },
     {
         path: "/car",
         method: "get",
-        action: carGetAllAction
+        action: carGetAll
     },
     {
         path: "/car/:id",
         method: "get",
-        action: carGetByIdAction
+        action: carGetById
     }
 ];
