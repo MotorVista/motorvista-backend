@@ -2,7 +2,7 @@ import {Request, Response} from "express";
 import {AppDataSource} from "../data-source.js";
 import {User, UserRole} from "../entity/User.js";
 import {errors} from "../error.js";
-import {checkAuth, createSession} from "../auth.js";
+import {checkAuth, createSession, getCurrentUser} from "../auth.js";
 import {obscureEmail, validateEmail} from "../validate.js";
 import bcrypt from "bcrypt";
 
@@ -69,6 +69,17 @@ export async function userLogin(req: Request, res: Response) {
     }
 
     createSession(req, user);
+
+    user.email = obscureEmail(user.email);
+    delete user.password;
+    res.json(user);
+}
+
+export async function userGetLogin(req: Request, res: Response) {
+    const user = await getCurrentUser(req);
+    if (!user) {
+        throw errors.UNAUTHORIZED;
+    }
 
     user.email = obscureEmail(user.email);
     delete user.password;
