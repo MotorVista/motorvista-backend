@@ -3,13 +3,7 @@ import { AppDataSource } from "../data-source.js";
 import { Vendor } from "../entity/Vendor.js";
 import { errors } from "../error.js";
 
-export async function vendorGetAll(req: Request, res: Response) {
-    const vendorRepository = AppDataSource.getRepository(Vendor);
-    const vendors = await vendorRepository.find();
-    res.json(vendors);
-}
-
-export async function vendorGetById(req: Request, res: Response) {
+export async function vendorGetByIdAction(req: Request, res: Response) {
     const vendorRepository = AppDataSource.getRepository(Vendor);
 
     const id = parseInt(req.params.id);
