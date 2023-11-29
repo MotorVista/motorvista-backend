@@ -40,7 +40,35 @@ export async function userRegister(req: Request, res: Response) {
     }
 
     // create http session
-    createSession(req, user.id, user.role);
+    createSession(req, user);
+
+    user.email = obscureEmail(user.email);
+    delete user.password;
+    res.json(user);
+}
+
+export async function userLogin(req: Request, res: Response) {
+    if (checkAuth(req)) {
+        throw errors.ALREADY_AUTHORIZED;
+    }
+
+    const { email, password } = req.body;
+    if (!email || !password) {
+        throw errors.INVALID_PARAMETER;
+    }
+
+    const repo = AppDataSource.getRepository(User);
+    const user = await repo.findOneBy({ email });
+    if (!user) {
+        throw errors.USER_NOT_FOUND;
+    }
+
+    const compare = await bcrypt.compare(password, user.password);
+    if (!compare) {
+        throw errors.INVALID_PASSWORD;
+    }
+
+    createSession(req, user);
 
     user.email = obscureEmail(user.email);
     delete user.password;

@@ -1,6 +1,6 @@
 import { vendorGetAll, vendorGetById } from "./controller/Vendor.js";
 import { carGetAll, carGetById } from "./controller/Car.js";
-import { userRegister } from "./controller/User.js";
+import { userRegister, userLogin } from "./controller/User.js";
 
 export const AppRoutes = [
     {
@@ -29,5 +29,10 @@ export const AppRoutes = [
         path: "/register",
         method: "post",
         action: userRegister
+    },
+    {
+        path: "/login",
+        method: "post",
+        action: userLogin
     }
 ];

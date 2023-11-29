@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { UserSession } from "./user-session.js";
-import { UserRole } from "./entity/User.js";
+import { User, UserRole } from "./entity/User.js";
 
-export function createSession(req: Request, id: number, role: UserRole) {
-    req.session.user = new UserSession(id, role);
+export function createSession(req: Request, user: User) {
+    req.session.user = new UserSession(user.id, user.role);
 }
 
 export function checkAuth(req: Request): boolean {
