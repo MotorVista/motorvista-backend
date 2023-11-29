@@ -7,6 +7,11 @@ export function createSession(req: Request, user: User) {
     req.session.user = new UserSession(user.id, user.role);
 }
 
+export function destroySession(req: Request) {
+    req.session.user = null;
+    req.session.destroy(() => {});
+}
+
 export function checkAuth(req: Request): boolean {
     return !!req.session?.user;
 }
