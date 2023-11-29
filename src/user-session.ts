@@ -1,4 +1,4 @@
-export default class {
+export class UserSession {
     id: number
     role: string
 }

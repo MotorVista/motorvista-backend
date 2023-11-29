@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import {AppDataSource} from "../data-source.js";
 import {User, UserRole} from "../entity/User.js";
+import {UserSession} from "../user-session.js";
 import {errors} from "../error.js";
 import {checkAuth} from "../auth.js";
 import {obscureEmail, validateEmail} from "../validate.js";
@@ -32,6 +33,8 @@ export async function userRegister(req: Request, res: Response) {
         email, password: passwordHash, firstName, lastName, role: UserRole.USER
     });
     await repo.save(user);
+
+
 
     user.email = obscureEmail(user.email);
     delete user.password;
