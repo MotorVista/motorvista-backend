@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import sessions from "express-session";
 import "express-async-errors";
 import APIErrorHandler from './middleware/api-error-handler.js';
+import { UserSession } from "./user-session.js";
 import { AppDataSource } from "./data-source.js";
 import { AppRoutes } from "./routes.js";
 
@@ -23,8 +24,10 @@ AppDataSource.initialize().then(() => {
     }));
 
     AppRoutes.forEach((route) => {
-        app[route.method](route.path, (request: Request, response: Response, next: NextFunction) => {
-            route.action(request, response)
+        app[route.method](route.path, (req: Request, res: Response, next: NextFunction) => {
+            // check auth
+
+            route.action(req, res)
                 .then(() => next())
                 .catch(err => next(err));
         });

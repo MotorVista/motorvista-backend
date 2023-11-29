@@ -7,7 +7,7 @@ export default function(err, req: Request, res: Response, next: NextFunction): v
     } else {
         console.log(err.toString());
         res.json(errors.UNKNOWN_ERROR);
-    }
 
-    next(err);
+        next(err);
+    }
 }
