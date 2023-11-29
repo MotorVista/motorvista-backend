@@ -27,15 +27,15 @@ export async function getCurrentUser(req: Request) {
     return await repo.findOneBy({ id: req.session.user.id });
 }
 
-export function checkRole(req: Request, role: UserRole) {
-    if (!checkAuth(req)) {
-        return false;
-    }
-}
-
-export function checkRole(first: UserRole, second: UserRole) {
-    return first == UserRole.ADMIN || first == second;
-}
+// export function checkRole(req: Request, role: UserRole) {
+//     if (!checkAuth(req)) {
+//         return false;
+//     }
+// }
+//
+// export function checkRole(first: UserRole, second: UserRole) {
+//     return first == UserRole.ADMIN || first == second;
+// }
 
 // export function checkRouteAuth(route: Route, req: Request) {
 //     if (route.auth) {
